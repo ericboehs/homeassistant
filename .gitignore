@@ -1,0 +1,17 @@
+# Ignore everything
+*
+
+# Except these files
+!*.yaml
+!.gitignore
+!*.md
+
+# Ignore these directories
+.storage
+.cloud
+.google.token
+
+# But definetly these
+ip_bans.yaml
+secrets.yaml
+known_devices.yaml

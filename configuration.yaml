@@ -1,0 +1,46 @@
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+# http: #   base_url: example.duckdns.org:8123
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+switch:
+  - platform: command_line
+    switches:
+      layla_tv_power:
+        command_on: 'curl -X POST http://10.0.1.54:8060/keypress/PowerOn'
+        command_off: 'curl -X POST http://10.0.1.54:8060/keypress/PowerOff'
+        command_state: 'curl -s GET http://10.0.1.54:8060/query/device-info | grep power-mode | sed -e "s:<power-mode>Headless</power-mode>:OFF:" -e "s:<power-mode>DisplayOff</power-mode>:OFF:" -e "s:<power-mode>PowerOn</power-mode>:ON:"'
+        value_template: '{{ value == "ON" }}'
+
+homekit:
+  auto_start: false
+
+  filter:
+    exclude_entities:
+      - climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_heating_1
+
+  entity_config:
+    climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_cooling_1:
+      name: Office Thermostat
+
+    climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_heating_1:
+      name: Office Thermostat
+
+media_player:
+  - platform: roku
+    host: 10.0.1.54
+
+homeassistant:
+  customize:
+    climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_heating_1:
+      hidden: true
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
