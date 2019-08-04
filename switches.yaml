@@ -1,0 +1,29 @@
+- platform: command_line
+  switches:
+    living_room_tv_power:
+      friendly_name: Living Room TV
+      command_on: 'wakeonlan 54:8c:a0:0a:dc:76; curl -X POST http://10.0.1.51:8060/keypress/PowerOn'
+      command_off: 'curl -X POST http://10.0.1.51:8060/keypress/PowerOff'
+      command_state: 'curl -s GET http://10.0.1.51:8060/query/device-info | grep power-mode | sed -e "s:<power-mode>Headless</power-mode>:OFF:" -e "s:<power-mode>DisplayOff</power-mode>:OFF:" -e "s:<power-mode>PowerOn</power-mode>:ON:"'
+      value_template: '{{ value == "ON" }}'
+
+    bedroom_tv_power:
+      friendly_name: Bedroom TV
+      command_on: 'wakeonlan 58:00:e3:0a:24:1e; curl -X POST http://10.0.1.52:8060/keypress/PowerOn'
+      command_off: 'curl -X POST http://10.0.1.52:8060/keypress/PowerOff'
+      command_state: 'curl -s GET http://10.0.1.52:8060/query/device-info | grep power-mode | sed -e "s:<power-mode>Headless</power-mode>:OFF:" -e "s:<power-mode>DisplayOff</power-mode>:OFF:" -e "s:<power-mode>PowerOn</power-mode>:ON:"'
+      value_template: '{{ value == "ON" }}'
+
+    allie_tv_power:
+      friendly_name: Allie's Room TV
+      command_on: 'curl -X POST http://10.0.1.53:8060/keypress/PowerOn'
+      command_off: 'curl -X POST http://10.0.1.53:8060/keypress/PowerOff'
+      command_state: 'curl -s GET http://10.0.1.53:8060/query/device-info | grep power-mode | sed -e "s:<power-mode>Headless</power-mode>:OFF:" -e "s:<power-mode>DisplayOff</power-mode>:OFF:" -e "s:<power-mode>PowerOn</power-mode>:ON:"'
+      value_template: '{{ value == "ON" }}'
+
+    layla_tv_power:
+      friendly_name: Layla's Room TV
+      command_on: 'curl -X POST http://10.0.1.54:8060/keypress/PowerOn'
+      command_off: 'curl -X POST http://10.0.1.54:8060/keypress/PowerOff'
+      command_state: 'curl -s GET http://10.0.1.54:8060/query/device-info | grep power-mode | sed -e "s:<power-mode>Headless</power-mode>:OFF:" -e "s:<power-mode>DisplayOff</power-mode>:OFF:" -e "s:<power-mode>PowerOn</power-mode>:ON:"'
+      value_template: '{{ value == "ON" }}'

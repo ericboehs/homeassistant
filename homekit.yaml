@@ -1,0 +1,10 @@
+auto_start: false
+
+filter:
+  exclude_entities:
+    - climate.office_thermostat_heating_1
+    - sensor.office_thermostat_temperature
+    - binary_sensor.remote_ui
+  exclude_domains:
+    - automation
+    - remote

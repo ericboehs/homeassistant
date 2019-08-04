@@ -1,12 +1,51 @@
 - id: '1564203487656'
   alias: Start HomeKit
   trigger:
-    - platform: event
-      event_type: zwave.network_ready
-    - platform: event
-      event_type: zwave.network_complete
-    - platform: event
-      event_type: zwave.network_complete_some_dead
+  - platform: event
+    event_type: zwave.network_ready
+  - platform: event
+    event_type: zwave.network_complete
+  - platform: event
+    event_type: zwave.network_complete_some_dead
   action:
-    - delay: 00:02
-    - service: homekit.start
+  - delay: 00:02
+  - service: homekit.start
+- id: '1'
+  alias: Set Office to 72
+  trigger:
+  - event_data:
+      command: button_single
+      device_ieee: 28:6d:97:00:01:04:c5:8a
+    event_type: zha_event
+    platform: event
+  action:
+  - data:
+      entity_id: climate.office_thermostat_cooling_1
+      temperature: 72
+    service: climate.set_temperature
+- id: '2'
+  alias: Set Office to 74
+  trigger:
+  - event_data:
+      command: button_double
+      device_ieee: 28:6d:97:00:01:04:c5:8a
+    event_type: zha_event
+    platform: event
+  action:
+  - data:
+      entity_id: climate.office_thermostat_cooling_1
+      temperature: 74
+    service: climate.set_temperature
+- id: '3'
+  alias: Set Office to 69
+  trigger:
+  - event_data:
+      command: button_hold
+      device_ieee: 28:6d:97:00:01:04:c5:8a
+    event_type: zha_event
+    platform: event
+  action:
+  - data:
+      entity_id: climate.office_thermostat_cooling_1
+      temperature: 69
+    service: climate.set_temperature
